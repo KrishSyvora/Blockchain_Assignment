@@ -1,66 +1,22 @@
-## Foundry
+# BingoGame Smart Contract
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## Overview
+BingoGame is a decentralized bingo game implemented in Solidity. Players can join games, pay an entry fee, and compete to win the pot. The game follows standard Bingo rules with random number draws and board tracking.
 
-Foundry consists of:
+## Contracts
+### 1. `BingoGame.sol`
+- Manages game creation, player participation, and number drawing.
+- Handles prize distribution and game resets.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+### 2. `BingoBoard.sol`
+- Generates Bingo boards for players.
+- Tracks marked numbers and determines winners.
 
-## Documentation
+### 3. `BingoToken.sol`
+- ERC-20 token used as in-game currency.
 
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
-```
-
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+## Features
+- **Decentralized**: Runs on Ethereum-compatible networks.
+- **Fair Number Draws**: Uses blockhash for pseudo-randomness.
+- **Automated Prize Distribution**: Rewards winners with the game pot.
+- **Customizable Settings**: Admin can adjust entry fees and durations.

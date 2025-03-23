@@ -1,0 +1,85 @@
+diff --git a/.DS_Store b/.DS_Store
+index daf374a..571a8f5 100644
+Binary files a/.DS_Store and b/.DS_Store differ
+diff --git a/lib/openzeppelin-contracts b/lib/openzeppelin-contracts
+index fda6b85..acd4ff7 160000
+--- a/lib/openzeppelin-contracts
++++ b/lib/openzeppelin-contracts
+@@ -1 +1 @@
+-Subproject commit fda6b85f2c65d146b86d513a604554d15abd6679
++Subproject commit acd4ff74de833399287ed6b31b4debf6b2b35527
+diff --git a/script/Counter.s.sol b/script/Counter.s.sol
+deleted file mode 100644
+index cdc1fe9..0000000
+--- a/script/Counter.s.sol
++++ /dev/null
+@@ -1,19 +0,0 @@
+-// SPDX-License-Identifier: UNLICENSED
+-pragma solidity ^0.8.13;
+-
+-import {Script, console} from "forge-std/Script.sol";
+-import {Counter} from "../src/Counter.sol";
+-
+-contract CounterScript is Script {
+-    Counter public counter;
+-
+-    function setUp() public {}
+-
+-    function run() public {
+-        vm.startBroadcast();
+-
+-        counter = new Counter();
+-
+-        vm.stopBroadcast();
+-    }
+-}
+diff --git a/src/Counter.sol b/src/Counter.sol
+deleted file mode 100644
+index aded799..0000000
+--- a/src/Counter.sol
++++ /dev/null
+@@ -1,14 +0,0 @@
+-// SPDX-License-Identifier: UNLICENSED
+-pragma solidity ^0.8.13;
+-
+-contract Counter {
+-    uint256 public number;
+-
+-    function setNumber(uint256 newNumber) public {
+-        number = newNumber;
+-    }
+-
+-    function increment() public {
+-        number++;
+-    }
+-}
+diff --git a/test/Counter.t.sol b/test/Counter.t.sol
+deleted file mode 100644
+index 54b724f..0000000
+--- a/test/Counter.t.sol
++++ /dev/null
+@@ -1,24 +0,0 @@
+-// SPDX-License-Identifier: UNLICENSED
+-pragma solidity ^0.8.13;
+-
+-import {Test, console} from "forge-std/Test.sol";
+-import {Counter} from "../src/Counter.sol";
+-
+-contract CounterTest is Test {
+-    Counter public counter;
+-
+-    function setUp() public {
+-        counter = new Counter();
+-        counter.setNumber(0);
+-    }
+-
+-    function test_Increment() public {
+-        counter.increment();
+-        assertEq(counter.number(), 1);
+-    }
+-
+-    function testFuzz_SetNumber(uint256 x) public {
+-        counter.setNumber(x);
+-        assertEq(counter.number(), x);
+-    }
+-}
