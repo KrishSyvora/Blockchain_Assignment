@@ -7,7 +7,7 @@ import "../src/CrowdFunding.sol";
 contract DeployCrowdfunding is Script {
     function run() external {
         vm.startBroadcast();
-        new Crowdfunding();
+        new CrowdFunding();
         vm.stopBroadcast();
     }
 }
