@@ -1,66 +1,77 @@
-## Foundry
+Overview
+TreasureHunt is a decentralized game implemented in Solidity where players explore a 10x10 grid to find a hidden treasure. Players pay a join fee, navigate the grid, and the first to reach the treasure wins a reward. The treasure moves dynamically based on specific rules, making the game unpredictable and exciting.
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+Contract
+TreasureHunt.sol
+Manages player participation, movement, and treasure tracking.
 
-Foundry consists of:
+Handles prize distribution and game resets.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+Uses pseudo-randomness with keccak256 and block properties for dynamic treasure placement.
 
-## Documentation
+Features:
+Decentralized Game Logic: Players interact directly with the contract on the blockchain.
 
-https://book.getfoundry.sh/
+Dynamic Treasure Movement: The treasure moves based on player actions and specific conditions.
 
-## Usage
+Fair Rewards: The winner receives 90% of the contract balance as the prize.
 
-### Build
+Game Rules
+The grid is a 10x10 board (rows and columns range from 0 to 9).
 
-```shell
-$ forge build
-```
+Players can move to adjacent cells (up, down, left, or right).
 
-### Test
+The treasure moves:
 
-```shell
-$ forge test
-```
+On multiples of 5: Treasure moves to an adjacent cell.
 
-### Format
+On prime-numbered cells: Treasure teleports to a random location.
 
-```shell
-$ forge fmt
-```
+The first player to reach the treasure wins.
 
-### Gas Snapshots
+Functions
 
-```shell
-$ forge snapshot
-```
+Player Actions
+joinGame()
 
-### Anvil
+Players join the game by paying the joinFee.
 
-```shell
-$ anvil
-```
+Each player is assigned a random starting position on the grid.
 
-### Deploy
+Requires: Sufficient ETH and not already joined.
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+move(uint8 nextRow, uint8 nextCol)
 
-### Cast
+Moves the player to an adjacent cell.
 
-```shell
-$ cast <subcommand>
-```
+If the player reaches the treasure, they are declared the winner.
 
-### Help
+Triggers:
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+moveTreasure() if the player steps on specific cells.
+
+declareWinner() if the treasure is found.
+
+Treasure Movement
+moveTreasure(uint8 row, uint8 col)
+
+Moves the treasure based on the player's new position:
+
+Multiple of 5: Moves to an adjacent cell.
+
+Prime cell: Moves to a random position.
+
+moveToAdjacent()
+
+Moves the treasure up, down, left, or right (if not at the grid edge).
+
+moveToRandom()
+
+Teleports the treasure to a random position.
+
+Winner Declaration
+declareWinner()
+
+Declares the winner and transfers 90% of the contract balance as the prize.
+
+Emits the WinnerDeclared event.
