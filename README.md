@@ -1,66 +1,22 @@
-## Foundry
+# 🗳️ Simple DAO Governance System (Compound-Inspired)
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This is a smart contract system implementing a simplified DAO governance mechanism inspired by Compound Protocol. It includes proposal creation, voting, queuing via Timelock, and execution of governance decisions.
 
-Foundry consists of:
+## 📁 Contracts Overview
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+### `GovToken.sol`
+- ERC20-based governance token with vote delegation and checkpointing.
+- Uses `getPastVotes()` for snapshot-based voting.
 
-## Documentation
+### `Governor.sol`
+- Manages proposals and voting lifecycle.
+- Handles:
+  - Proposal creation (`propose`)
+  - Voting (`vote`)
+  - Queuing via Timelock (`queue`)
+  - Execution of successful proposals (`execute`)
+  
+### `MyTimelock.sol`
+- Custom Compound-style timelock.
+- Enforces a delay between proposal queuing and execution.
 
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
-```
-
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
